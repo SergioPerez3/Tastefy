@@ -12,6 +12,8 @@ import RecipeFormPage from "../pages/RecipeFormPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import authLoader from "../loaders/authLoader";
 import LikedPage from "../pages/LikedPage";
+import AboutPage from "../pages/AboutPage";
+import ContactPage from "../pages/ContactPage";
 
 export const router = createBrowserRouter([
   {
@@ -26,11 +28,21 @@ export const router = createBrowserRouter([
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
       { path: "likes", loader: authLoader, element: <LikedPage /> },
+      { path: "about", element: <AboutPage /> },
+      { path: "contact", element: <ContactPage /> },
 
-      // RUTAS PRIVADAS 
-      { path: "dashboard",loader: authLoader, element: <DashboardPage /> },
-      { path: "dashboard/recipes/new",loader: authLoader, element: <RecipeFormPage /> },
-      { path: "dashboard/recipes/:id/edit",loader: authLoader, element: <RecipeFormPage /> },
+      // RUTAS PRIVADAS
+      { path: "dashboard", loader: authLoader, element: <DashboardPage /> },
+      {
+        path: "dashboard/recipes/new",
+        loader: authLoader,
+        element: <RecipeFormPage />,
+      },
+      {
+        path: "dashboard/recipes/:id/edit",
+        loader: authLoader,
+        element: <RecipeFormPage />,
+      },
 
       { path: "*", element: <NotFoundPage /> },
     ],

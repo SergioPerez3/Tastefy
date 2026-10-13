@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getUserById } from "../services/userService";
 import { deleteRecipe } from "../services/recipeService";
 import { useAuth } from "../hooks/useAuth";
+import ConfirmModal from "../components/ConfirmModal";
 
 function DashboardPage() {
   const { user } = useAuth();
@@ -11,6 +12,7 @@ function DashboardPage() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [recipeToDelete, setRecipeToDelete] = useState(null);
 
   useEffect(() => {
     if (!userId) return;
@@ -29,16 +31,15 @@ function DashboardPage() {
     fetchMyRecipes();
   }, [userId]);
 
-  const handleDelete = async (id) => {
-    const confirmed = window.confirm("¿Seguro que quieres borrar esta receta?");
-    if (!confirmed) return;
-
+  const handleDelete = async () => {
     try {
       setError(null);
-      await deleteRecipe(id);
-      setRecipes(recipes.filter((recipe) => recipe._id !== id));
+      await deleteRecipe(recipeToDelete._id);
+      setRecipes(recipes.filter((recipe) => recipe._id !== recipeToDelete._id));
     } catch (error) {
       setError(error.message);
+    } finally {
+      setRecipeToDelete(null);
     }
   };
 
@@ -73,12 +74,23 @@ function DashboardPage() {
 
               <div className="mini-card-actions">
                 <Link to={`/dashboard/recipes/${recipe._id}/edit`}>Editar</Link>
-                <button onClick={() => handleDelete(recipe._id)}>Borrar</button>
+                <button onClick={() => setRecipeToDelete(recipe)}>
+                  Borrar
+                </button>
               </div>
             </article>
           ))}
         </div>
       </div>
+      {recipeToDelete && (
+        <ConfirmModal
+          title="¿Borrar receta?"
+          message={`Vas a borrar "${recipeToDelete.title}". Esta acción no se puede deshacer.`}
+          confirmText="Sí, borrar"
+          onConfirm={handleDelete}
+          onCancel={() => setRecipeToDelete(null)}
+        />
+      )}
     </section>
   );
 }

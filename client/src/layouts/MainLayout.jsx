@@ -1,6 +1,7 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, NavLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import UserIcon from "../components/UserIcon";
+import Footer from "../components/Footer";
 
 function MainLayout() {
   const { user, logout } = useAuth();
@@ -12,59 +13,37 @@ function MainLayout() {
   };
 
   return (
-    <>
-      <header className="brand">
-        <Link to="/" className="brand-title">
-          <span className="brand-icon" aria-hidden="true">
-            🍴
-          </span>
-          <span>TASTEFY</span>
-          <span className="brand-icon" aria-hidden="true">
-            🔪
-          </span>
-        </Link>
-        <p className="brand-tagline">Donde las ideas se llevan a la olla</p>
-      </header>
+  <div className="app-shell">
+    <nav className="main-nav">
+      <Link to="/" className="nav-logo">
+        <img src="/logo.png" alt="Tastefy" />
+      </Link>
 
-      <nav className="main-nav">
-        <div className="nav-spacer" />
+      <div className="nav-links">
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/recipes">Despensa</NavLink>
+        <NavLink to="/dashboard">Mi Cocina</NavLink>
+        <NavLink to="/likes" className="nav-likes">♥ Me gusta</NavLink>
+      </div>
 
-        <div className="nav-links">
-          <Link to="/recipes">Despensa</Link>
-          <Link to="/dashboard">Mi Cocina</Link>
-          <Link to="/likes" className="nav-likes" title="Mis me gusta">
-            <span aria-hidden="true">❤️</span>
-            <span className="sr-only">Mis me gusta</span>
-          </Link>
-        </div>
-
+      <div className={`nav-user ${user ? "is-online" : "is-offline"}`}>
         {user ? (
-          <div className="nav-user is-online">
-            <Link to="/dashboard" className="nav-user-link">
-              <UserIcon />
-              <span>Hola, {user.name}</span>
-            </Link>
-            <button className="nav-logout" onClick={handleLogout}>
-              Salir
-            </button>
-          </div>
-        ) : (
-          <Link to="/login" className="nav-user is-offline">
+          <>
             <UserIcon />
-            <span>¡Entra ya!</span>
-          </Link>
+            <span>Hola, {user.name}</span>
+            <button className="nav-logout" onClick={handleLogout}>Salir</button>
+          </>
+        ) : (
+          <Link to="/login"><UserIcon /> ¡Entra ya!</Link>
         )}
-      </nav>
-
-      <main>
-        <Outlet />
-      </main>
-
-      <footer>
-        <p>© Tastefy</p>
-      </footer>
-    </>
-  );
+      </div>
+    </nav>
+        <main>
+    <Outlet />
+    </main>
+    <Footer />
+  </div>  
+);
 }
 
 export default MainLayout;

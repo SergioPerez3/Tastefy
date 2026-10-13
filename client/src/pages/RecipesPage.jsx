@@ -10,6 +10,7 @@ const initialFilters = {
   search: "",
   category: "",
   difficulty: "",
+  sort: "recent",
 };
 
 // Quita tildes y mayúsculas para que "facil" encuentre "fácil"
@@ -80,9 +81,19 @@ function RecipesPage() {
     return matchesSearch && matchesCategory && matchesDifficulty;
   });
 
+  const sortedRecipes = [...filteredRecipes].sort((a, b) => {
+    if (filters.sort === "oldest") {
+      return new Date(a.createdAt) - new Date(b.createdAt);
+    }
+    if (filters.sort === "liked") {
+      return b.likes.length - a.likes.length;
+    }
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+
   const totalPages = Math.ceil(filteredRecipes.length / PER_PAGE);
   const start = page * PER_PAGE;
-  const visibleRecipes = filteredRecipes.slice(start, start + PER_PAGE);
+  const visibleRecipes = sortedRecipes.slice(start, start + PER_PAGE);
 
   return (
     <section className="despensa">
@@ -109,7 +120,7 @@ function RecipesPage() {
           <p>No hay recetas con esos filtros.</p>
         )}
 
-        <div className="despensa-grid">
+        <div className="recipe-grid recipe-grid--3">
           {visibleRecipes.map((recipe) => (
             <RecipeCard key={recipe._id} recipe={recipe} />
           ))}
