@@ -49,7 +49,7 @@ function HomePage() {
 </section>
 
         <RecipeCarousel title="Nuevas recetas" recipes={recipes.slice(0, 12)} />
-        <RecipeCarousel title="Los más gustados" recipes={mostLiked} />
+        <RecipeCarousel title="Las más tops" recipes={mostLiked} />
 
         <Link to="/recipes">Ver toda la despensa</Link>
       </div>

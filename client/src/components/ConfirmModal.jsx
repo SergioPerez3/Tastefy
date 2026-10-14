@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 function ConfirmModal({ title, message, confirmText = "Aceptar", onConfirm, onCancel }) {
-  // Esc cierra la ventana
   useEffect(() => {
     const handleKey = (event) => {
       if (event.key === "Escape") onCancel();

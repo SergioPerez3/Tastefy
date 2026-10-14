@@ -31,7 +31,7 @@ describe("Usuarios", function () {
     profileUser = await registerAndLogin("Perfil", PROFILE_EMAIL);
     emptyUser = await registerAndLogin("Vacio", EMPTY_EMAIL);
 
-    // El usuario "Perfil" publica dos recetas
+    
     const recipes = [
       {
         title: "Paella",

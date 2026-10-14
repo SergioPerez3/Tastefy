@@ -7,6 +7,8 @@ import {
 } from "../services/recipeService";
 import { CATEGORIES, DIFFICULTIES } from "../constants/recipe";
 
+import { uploadImage } from "../services/imageService";
+
 const initialForm = {
   title: "",
   description: "",
@@ -24,6 +26,8 @@ function RecipeFormPage() {
 
   const [form, setForm] = useState(initialForm);
   const [error, setError] = useState(null);
+
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -57,6 +61,31 @@ function RecipeFormPage() {
       ...form,
       [name]: value,
     });
+  };
+
+  const handleImageChange = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setError("El archivo debe ser una imagen");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setError("La imagen no puede pesar más de 5 MB");
+      return;
+    }
+
+    try {
+      setError(null);
+      setUploading(true);
+      const url = await uploadImage(file);
+      setForm((current) => ({ ...current, image: url }));
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -118,15 +147,26 @@ function RecipeFormPage() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="image">Imagen (URL): </label>
+            <label htmlFor="image">Foto de la receta: </label>
+
+            {form.image && (
+              <img
+                className="image-preview"
+                src={form.image}
+                alt="Vista previa"
+              />
+            )}
+
             <input
-              type="text"
-              name="image"
+              type="file"
               id="image"
-              value={form.image}
-              onChange={handleChange}
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handleImageChange}
+              disabled={uploading}
             />
+            {uploading && <p>Subiendo imagen...</p>}
           </div>
+
 
           <div className="form-group">
             <label htmlFor="ingredients">Ingredientes (uno por línea): </label>
@@ -194,7 +234,7 @@ function RecipeFormPage() {
             />
           </div>
 
-          <button className="btn" type="submit">
+          <button className="btn" type="submit" disabled={uploading}>
             {id ? "Guardar cambios" : "Publicar receta"}
           </button>
 

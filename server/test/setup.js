@@ -1,5 +1,5 @@
 import dns from "node:dns";
-dns.setServers(["8.8.8.8", "1.1.1.1"]); // mismo arreglo de DNS que en index.js
+dns.setServers(["8.8.8.8", "1.1.1.1"]); 
 
 import { config } from "dotenv";
 config({ path: ".env.test" });
