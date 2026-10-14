@@ -48,7 +48,7 @@ function RecipeCard({ recipe, onLikeChange }) {
           <span>👨‍🍳 {recipe.difficulty}</span>
           {recipe.author?.name && (
             <Link to={`/users/${recipe.author._id}`} className="rc-author">
-              Por {recipe.author.name}
+              {recipe.author.name}
             </Link>
           )}
         </div>

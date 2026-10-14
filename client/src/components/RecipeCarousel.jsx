@@ -26,7 +26,7 @@ function RecipeCarousel({ title, recipes }) {
           ‹
         </button>
 
-        <div className="carousel-grid">
+        <div key={page} className="carousel-grid">
           {visibleRecipes.map((recipe) => (
             <RecipeCard key={recipe._id} recipe={recipe} />
           ))}
