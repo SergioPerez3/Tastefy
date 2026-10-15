@@ -19,6 +19,7 @@
   <img src="https://img.shields.io/badge/Node.js-Express_5-339933?logo=nodedotjs&logoColor=white" alt="Node y Express">
   <img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white" alt="MongoDB">
   <img src="https://img.shields.io/badge/Auth-JWT-000000?logo=jsonwebtokens&logoColor=white" alt="JWT">
+  <img src="https://img.shields.io/badge/Cloudinary-Im%C3%A1genes-3448C5?logo=cloudinary&logoColor=white" alt="Cloudinary">
   <img src="https://img.shields.io/badge/Tests-Mocha_%2B_Chai-8D6748?logo=mocha&logoColor=white" alt="Mocha">
 </p>
 
@@ -29,8 +30,8 @@ descubren los de otras personas, los filtran por tipo de comida o dificultad y g
 sus favoritos con un "me gusta".
 
 Lo he creado para practicar desarrollo full-stack de principio a fin: API REST con
-autenticación, base de datos en la nube, tests automáticos y una interfaz propia con
-diseño a medida.
+autenticación, base de datos en la nube, subida de imágenes, tests automáticos, despliegue
+en producción y una interfaz propia con diseño a medida.
 
 ## Capturas
 
@@ -45,18 +46,19 @@ diseño a medida.
 - **Despensa**: búsqueda por texto (título, descripción e ingredientes), filtros por tipo
   de comida y dificultad, orden por fecha o por likes, y paginación.
 - **Mi Cocina**: crear, editar y borrar tus propias recetas, con confirmación antes de borrar.
-- **Subida de fotos** desde la galería del usuario, alojadas en Cloudinary.
+- **Subida de fotos** desde la galería del usuario: la API las recibe con Multer y las
+  guarda en Cloudinary.
 - **Me gusta** sincronizados por usuario, y página con todas las recetas que te gustan.
 - **Rutas protegidas** para las secciones privadas.
-- **Diseño propio** en tema oscuro con efecto cristal, fuentes personalizadas y componentes
-  reutilizables.
+- **Diseño propio** en tema oscuro con efecto cristal, fuentes personalizadas, componentes
+  reutilizables y adaptado a móvil.
 
 ## Tecnologías
 
 | Parte | Tecnologías |
 |---|---|
 | Front end | React, Vite, React Router, CSS propio (variables, glassmorphism, grid) |
-| Back end | Node.js, Express 5, Mongoose 9, JWT, bcryptjs, CORS |
+| Back end | Node.js, Express 5, Mongoose 9, JWT, bcryptjs, CORS, Multer |
 | Base de datos | MongoDB Atlas |
 | Imágenes | Cloudinary |
 | Tests | Mocha, Chai, Supertest |
@@ -64,7 +66,7 @@ diseño a medida.
 ## 🌐 Despliegue
 
 | Parte | Plataforma |
-|-------|------------|
+|---|---|
 | Front end (React + Vite) | Vercel |
 | API (Node + Express) | Render |
 | Base de datos | MongoDB Atlas |
@@ -81,11 +83,12 @@ Tastefy/
 
 ## Puesta en marcha
 
-Necesitas **Node.js 18+** y una base de datos en **MongoDB Atlas**.
+Necesitas **Node.js 18+**, una base de datos en **MongoDB Atlas** y una cuenta gratuita
+de **Cloudinary**.
 
 ```bash
-git clone https://github.com/SergioPerez3/tastefy.git
-cd tastefy
+git clone https://github.com/SergioPerez3/Tastefy.git
+cd Tastefy
 ```
 
 **1. Back end**
@@ -101,6 +104,9 @@ Crea `server/.env`:
 PORT=4000
 MONGO_URI=tu_cadena_de_conexion_de_atlas
 JWT_SECRET=una_clave_larga_y_secreta
+CLOUDINARY_CLOUD_NAME=tu_cloud_name
+CLOUDINARY_API_KEY=tu_api_key
+CLOUDINARY_API_SECRET=tu_api_secret
 ```
 
 ```bash
@@ -119,8 +125,6 @@ Crea `client/.env`:
 
 ```
 VITE_API_URL=http://localhost:4000
-VITE_CLOUDINARY_CLOUD_NAME=tu_cloud_name
-VITE_CLOUDINARY_PRESET=tastefy_recipes
 ```
 
 ```bash
@@ -152,6 +156,7 @@ Tras ejecutar `npm run seed` hay tres usuarios, todos con contraseña `123456`:
 | POST | `/recipes/:id/likes` | Dar me gusta | Sí |
 | DELETE | `/recipes/:id/likes` | Quitar me gusta | Sí |
 | GET | `/users/:id` | Perfil público y sus recetas | No |
+| POST | `/upload` | Subir una foto (campo `image`, máx. 5 MB) | Sí |
 
 La documentación detallada está en [`server/README.md`](server/README.md).
 
@@ -167,10 +172,9 @@ npm test
 
 ## Próximos pasos
 
-- [ ] Perfil público de cada usuario
-- [ ] Diseño responsive para móvil
-- [ ] Precio estimado y filtro por precio
-- [ ] Despliegue (Vercel + Render)
+- [x] Subida de fotos desde la galería
+- [x] Diseño responsive para móvil
+- [x] Despliegue (Vercel + Render)
 
 ## Autor
 
