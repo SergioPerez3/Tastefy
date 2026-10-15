@@ -1,5 +1,13 @@
 # 🍳 TASTEFY Front end
 
+<p align="center">
+  <a href="https://tastefy-peach.vercel.app">
+    <img src="https://img.shields.io/badge/🍳_Demo_en_vivo-tastefy--peach.vercel.app-ff7a3d?style=for-the-badge" alt="Demo en vivo" />
+  </a>
+</p>
+
+> ⏳ La API está en el plan gratuito de Render: si lleva un rato sin visitas, la primera carga puede tardar 30-50 segundos.
+
 Interfaz de **TASTEFY**, una red social de recetas. Hecha con **React** y **Vite**, consume la API de [`../server`](../server/README.md): los usuarios se registran, publican sus recetas con foto, las filtran, dan "me gusta" y guardan sus favoritas.
 
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)

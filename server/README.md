@@ -1,5 +1,13 @@
 # 🍳 TASTEFY API
 
+<p align="center">
+  <a href="https://tastefy-peach.vercel.app">
+    <img src="https://img.shields.io/badge/🍳_Demo_en_vivo-tastefy--peach.vercel.app-ff7a3d?style=for-the-badge" alt="Demo en vivo" />
+  </a>
+</p>
+
+> ⏳ La API está en el plan gratuito de Render: si lleva un rato sin visitas, la primera carga puede tardar 30-50 segundos.
+
 API REST del proyecto **TASTEFY**, una red social de recetas. Los usuarios se registran, publican sus recetas con foto, dan "me gusta" y pueden ver los perfiles de otros usuarios con sus recetas.
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)

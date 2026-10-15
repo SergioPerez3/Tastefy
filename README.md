@@ -6,6 +6,14 @@
 <p align="center"><i>Donde las ideas se llevan a la olla</i></p>
 
 <p align="center">
+  <a href="https://tastefy-peach.vercel.app">
+    <img src="https://img.shields.io/badge/🍳_Demo_en_vivo-tastefy--peach.vercel.app-ff7a3d?style=for-the-badge" alt="Demo en vivo" />
+  </a>
+</p>
+
+> ⏳ La API está en el plan gratuito de Render: si lleva un rato sin visitas, la primera carga puede tardar 30-50 segundos.
+
+<p align="center">
   <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white" alt="React">
   <img src="https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white" alt="Vite">
   <img src="https://img.shields.io/badge/Node.js-Express_5-339933?logo=nodedotjs&logoColor=white" alt="Node y Express">
@@ -52,6 +60,15 @@ diseño a medida.
 | Base de datos | MongoDB Atlas |
 | Imágenes | Cloudinary |
 | Tests | Mocha, Chai, Supertest |
+
+## 🌐 Despliegue
+
+| Parte | Plataforma |
+|-------|------------|
+| Front end (React + Vite) | Vercel |
+| API (Node + Express) | Render |
+| Base de datos | MongoDB Atlas |
+| Imágenes | Cloudinary |
 
 ## Estructura
 
